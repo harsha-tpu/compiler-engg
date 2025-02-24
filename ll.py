@@ -64,5 +64,16 @@ while updated:
                 else: 
                     storage = {symbol}
 
-for follow_item in follow:  
-    print(f"follow({follow_item}) = {follow[follow_item]}")
+def first_of_string(symbols):
+    pass
+
+# constructing parse table
+parse_table = defaultdict(dict)
+for nt in non_terminals:
+    for production in productions[nt]:
+        first_production = first_of_string(production)
+        for terminal in first_production - {'#'}:
+            parse_table[nt][terminal] = production
+        if '#' in first_production:
+            for terminal in follow[nt]:
+                parse_table[nt][terminal] = production
